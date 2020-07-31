@@ -21,8 +21,10 @@ def rjesenje(input):
 	empty = [[0] * 9] * 9
 	def uslov(pos, sudoku):
 		def dozvoljene_vrijednosti():
-			konflikti = set([ (r, c) for r in range(9) for c in range(9) if((r, c) != pos and konflikt(pos, (r, c)))])
-			nedozvoljeni = set([sudoku[r][c] for (r, c) in konflikti if sudoku[r][c] != 0])
+			konflikti = {(r, c)
+			             for r in range(9) for c in range(9)
+			             if ((r, c) != pos and konflikt(pos, (r, c)))}
+			nedozvoljeni = {sudoku[r][c] for (r, c) in konflikti if sudoku[r][c] != 0}
 			s = setminus(range(1, 10), nedozvoljeni)
 			random.shuffle(s)
 			return s
